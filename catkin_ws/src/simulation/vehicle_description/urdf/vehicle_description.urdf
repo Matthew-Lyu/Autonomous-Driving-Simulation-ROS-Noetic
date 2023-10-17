@@ -1,0 +1,19 @@
+<robot name="vehicle_description">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+      <mass value="0.0864" />
+      <inertia ixx="1.75e-04" ixy="0.0" ixz="0.0" iyy="6.4e-05" iyz="0.0" izz="8.4e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0.02" rpy="1.57 0. 1.57" />
+      <geometry>
+        <box size="0.06 0.04 0.12" />
+      </geometry>
+      <material name="">
+        <color rgba="0.5 0.1 0.9 1" />
+      </material>
+    </visual>
+  </link>
+</robot>
+

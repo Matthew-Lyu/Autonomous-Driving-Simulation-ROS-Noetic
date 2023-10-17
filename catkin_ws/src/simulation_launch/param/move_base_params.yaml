@@ -1,0 +1,47 @@
+base_global_planner: "global_planner/GlobalPlanner"
+base_local_planner: "dwa_local_planner/DWAPlannerROS"
+recovery_behaviors:
+  - {name: conservative_reset, type: clear_costmap_recovery/ClearCostmapRecovery} 
+  - {name: rotate_recovery, type: rotate_recovery/RotateRecovery} 
+  - {name: aggressive_reset, type: clear_costmap_recovery/ClearCostmapRecovery}
+
+# 运行全局规划循环的速率（以赫兹为单位）。 如果频率设置为0.0，则全局规划器仅在收到新目标或本地规划器报告其路径被阻塞时才会运行。（双精度，默认值：0.0）
+planner_frequency: 2.0
+
+# 运行控制循环并向基座发送速度命令的速率（以 Hz 为单位）。（双精度，默认值：20.0）
+controller_frequency: 4.0
+
+# 在执行空间清理操作之前，规划器将等待多长时间以尝试找到有效的计划。（双精度，默认值：5.0）
+planner_patience: 5.0
+
+# 在执行空间清理操作之前控制器将等待多长时间（以秒为单位）而没有收到有效的控制。（双精度，默认值：15.0）
+controller_patience: 3.0
+
+# 是否启用 move_base 恢复行为来尝试清理空间。(bool, 默认值: true)
+recovery_behavior_enabled: true
+
+# 确定机器人在尝试清理空间时是否尝试原地旋转。 注意：此参数仅在使用默认恢复行为时使用，这意味着用户尚未将 recovery_behaviors 参数设置为任何自定义内容。（bool，默认值：true）
+clearing_rotation_allowed: true
+
+# 决定当move_base处于非活动状态时是否关闭节点的costmap (bool, 默认: false)
+shutdown_costmaps: false
+
+# 在执行恢复行为之前允许振荡多长时间（以秒为单位）。 值 0.0 对应于无限超时。 （双精度，默认值：0.0）
+oscillation_timeout: 5.0
+
+# 机器人必须移动多远（以米为单位）才能被视为不发生振荡。 移动到这一步会重置计时器，直到达到〜oscillation_timeout（双精度，默认值：0.5）
+oscillation_distance: 0.3
+
+# 在执行恢复行为之前允许计划重试多少次。 值 -1.0 对应于无限重试。（int32_t，默认值：-1）
+#max_planning_retries: -1
+
+#############################
+# plug for recovery_behaviors
+#############################
+conservative_reset:
+# 距离机器人的半径（以米为单位），当成本地图恢复到静态地图时，超出该半径的障碍物将从成本地图中移除。
+    reset_distance: 1.0
+
+aggressive_reset:
+# 距离机器人的半径（以米为单位），当成本地图恢复到静态地图时，超出该半径的障碍物将从成本地图中移除。
+    reset_distance: 0.0

@@ -1,0 +1,168 @@
+# ns : DWAPlannerROS
+
+##################################
+#
+#  Robot Configuration Parameters
+#
+##################################
+
+# 机器人的 x 加速度限制，单位为米/秒^2（double，默认值：2.5）
+# acc_lim_x: 3.0
+acc_lim_x: 5
+
+# 机器人的 y 加速度限制，单位为米/秒^2（double，默认值：2.5）
+acc_lim_y: 0
+
+# 机器人的旋转加速度限制，以弧度/秒^2为单位（double，默认值：3.2）
+# acc_lim_theta: 10.0
+acc_lim_theta: 6.0
+
+
+# 机器人最大平移速度的绝对值，单位为米/秒（double，默认值：0.55）
+max_trans_vel: 0.3
+
+# 机器人最小平移速度的绝对值，单位为米/秒（double，默认值：0.1）
+min_trans_vel: 0.0
+
+# 机器人的最大 x 速度（以米/秒为单位）。 （double，默认值：0.55）
+# max_vel_x: 0.8
+max_vel_x: 0.5
+
+# 机器人的最小 x 速度（以米/秒为单位），向后运动为负值。 （double，默认值：0.0）
+#min_vel_x: -0.3
+min_vel_x: 0.2
+
+# 机器人的最大 y 速度，单位为米/秒（double，默认值：0.1）
+max_vel_y: 0.0
+
+# 机器人的最小 y 速度，单位为米/秒（double，默认值：-0.1）
+min_vel_y: 0.0
+
+# 机器人最大旋转速度的绝对值，以rad/s为单位（double，默认值：1.0）
+max_rot_vel: 1.0
+
+# 机器人最小旋转速度的绝对值，以 rad/s 为单位（double，默认值：0.4）
+min_rot_vel: 0.2
+
+rot_stopped_vel: 0.2
+trans_stopped_vel: 0.1
+##################################
+#
+#  Goal Tolerance Parameters
+#
+##################################
+
+# 达到目标时控制器在偏航/旋转方面的容差（以弧度为单位）（double，默认值：0.05）
+yaw_goal_tolerance: 1.0
+
+# 达到目标时控制器在 x 和 y 距离上的公差（以米为单位）（double，默认值：0.10）
+xy_goal_tolerance: 0.2
+
+# 如果目标容差被锁定，如果机器人到达目标 xy 位置，它将简单地旋转到位，即使它最终超出了目标容差。 （布尔值，默认值： false）
+latch_xy_goal_tolerance: false
+
+##################################
+#
+#  Forward Simulation Parameters
+#
+##################################
+
+# 前向模拟轨迹的时间量（以秒为单位）（double，默认值：1.7）
+sim_time: 1.0
+
+# 给定轨迹上的点之间的步长（以米为单位）（double，默认值：0.025）
+sim_granularity: 0.03
+angular_sim_granularity: 0.1
+
+# 探索 x 速度空间时使用的样本数（整数，默认值：3）
+vx_samples: 6
+
+# 探索 y 速度空间时使用的样本数（整数，默认值：10）
+vy_samples: 1
+
+# 探索 theta 速度空间时使用的样本数（整数，默认值：20）
+vtheta_samples: 5
+
+# 调用该控制器的频率（以 Hz 为单位）。 如果未在控制器的命名空间中设置，则使用 searchParam 从父命名空间读取参数。 对于与 move_base 一起使用，这意味着您只需要设置其“controller_Frequency”参数，并且可以安全地不设置该参数。 （double，默认值：20.0）
+#controller_frequency: 20
+
+##################################
+#
+#   Trajectory Scoring Parameters
+#
+# cost =  pdist_scale * (distance to path from the endpoint of the trajectory in map cells or meters depending on the meter_scoring parameter) 
+#  +      gdist_scale * (distance to local goal from the endpoint of the trajectory in map cells or meters depending on the meter_scoring parameter) 
+#  +      occdist_scale * (maximum obstacle cost along the trajectory in obstacle cost (0-254))
+#
+##################################
+
+# 控制器应在多大程度上保持接近给定路径的权重（double，默认值：32.0）
+path_distance_bias: 100
+
+# 控制器应尝试达到其本地目标的权重，也控制速度（double，默认值：24.0）
+goal_distance_bias: 24.0
+
+# 控制器应尝试避开障碍物的权重（double，默认值：0.01）
+occdist_scale: 20
+
+# 距离机器人中心点放置额外得分点的距离，单位为米（double，默认：0.325）
+forward_point_distance: 0.2
+
+# 机器人在碰撞之前必须停止的时间量，以便轨迹被视为有效（以秒为单位）（double，默认值：0.2）
+stop_time_buffer: 0.2
+
+# 开始缩放机器人足迹的速度的绝对值，以米/秒为单位（double，默认值：0.25）
+scaling_speed: 0.25
+
+# 缩放机器人足迹的最大因子（double，默认值：0.2）
+max_scaling_factor: 0.2
+
+#################################
+#
+# RotateFirtCostFunction
+#
+#################################
+
+# 机器人到路径的最小角度和机器人到路径的最大距离开始使该功能起作用
+angle_threshold: 2.0
+dist_threshold: 0.2
+
+# 最大x方向速度，该函数主要用于将机器人旋转到路径方向，所以我们必须限制x方向速度
+max_xv: 0.07
+
+# 分数的成本因素，越高效果越大
+cost_factor: 10.0
+
+# 捍卫零溢出的小偏见
+thetav_bias: 0.2
+
+##################################
+#
+#  Oscillation Prevention Parameters
+#
+##################################
+
+# 在重置振荡标志之前机器人必须行驶多远（以米为单位）（double，默认值：0.05）
+oscillation_reset_dist: 0.05
+
+
+##################################
+#
+#      Global Plan Parameters
+#
+##################################
+
+# 定义当机器人沿着路径移动时是否吃掉计划。 如果设置为 true，一旦机器人移动超过 1 米，点就会从计划的末端掉落。 （布尔值，默认值：true）
+prune_plan: true
+
+##################################
+#
+# Rivz Display Parameters for Debug
+#
+##################################
+
+# 发布DWA成本网格点云
+publish_cost_grid_pc: true
+
+# 发布DWA轨迹点云
+publish_traj_pc: true

@@ -1,0 +1,22 @@
+# ns : GlobalPlanner
+
+# 指定是否允许规划器创建遍历未知空间的规划。 注意：如果您使用带有体素或障碍层的分层 costmap_2d costmap，您还必须将该层的 track_unknown_space 参数设置为 true，否则它将把您所有的未知空间转换为可用空间（然后规划器会很高兴地向右走） 通过）。 （布尔值，默认值：true）
+allow_unknown: true
+
+# 规划者对目标点的容忍度。 规划器将尝试创建一个尽可能接近指定目标但不超过 default_tolerance 的计划。 （双精度，默认值：0.0）
+default_tolerance: 0.0
+
+# 指定是否可视化通过 PointCloud2 计算的潜在区域。 （布尔值，默认值： false）
+visualize_potential: false
+
+# 如果为 true，则使用 dijkstra 算法。 否则，A*。 （布尔值，默认值：true）
+use_dijkstra: true
+
+# 如果为真，则使用势的二次近似。 否则，请使用更简单的计算。 （布尔值，默认值：true）
+use_quadratic: true
+
+# 如果为 true，则创建一条遵循网格边界的路径。 否则，使用梯度下降法。 （布尔值，默认值： false）
+use_grid_path: false
+
+# 如果出于某种原因，您希望 global_planner 准确反映 navfn 的行为，请将其设置为 true （并使用其他布尔参数的默认值）（bool，默认值： false）
+old_navfn_behavior: false

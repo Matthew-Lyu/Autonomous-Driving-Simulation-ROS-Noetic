@@ -1,0 +1,144 @@
+# ns : global_costmap
+
+# 要在其中操作的成本图的全局框架。（字符串，默认值：“/map”）
+global_frame: map
+
+# 机器人基础链接的框架名称。（字符串，默认值：“base_link”）
+robot_base_frame: base_link
+
+# 圆形机器人应远离障碍物的距离 (kobuki: 0.18)
+robot_radius: 0.05
+#footprint: [[0.175, 0.15], [0.175, -0.15], [-0.175, -0.15], [-0.175, 0.15]]  # if the robot is not circular
+
+# used for obstacle_layer, 3D->voxel 2D->other
+map_type: costmap
+
+# 指定可容忍的转换 (tf) 数据延迟（以秒为单位）。 
+# 此参数可作为防止 tf 树中丢失链接的保护措施，同时仍允许系统中存在用户可以接受的延迟量。 
+# 例如，过时 0.2 秒的转换可能是可以容忍的，但过时 8 秒的转换则不能容忍。 
+# 如果global_frame和robot_base_frame参数指定的坐标系之间的tf变换比ros::Time::now()早transform_tolerance秒，则导航堆栈将停止机器人。（双精度，默认值：0.2）
+transform_tolerance: 0.5
+
+# 地图更新的频率（以 Hz 为单位）。（双精度，默认值：5.0）
+update_frequency: 2.0
+
+# 地图发布显示信息的频率，以 Hz 为单位。（双精度，默认：0.0）
+publish_frequency: 1.0
+
+# 是否使用滚动窗口版本的成本图。 如果 static_map 参数设置为 true，则该参数必须设置为 false。 （布尔值，默认值： false）
+rolling_window: false
+static_map: true
+
+# 如果为 true，则每次更新时完整的代价图都会发布到“~<name>/grid”。 如果为 false，则仅将成本图已更改的部分发布在“~<name>/grid_updates”主题上。 （布尔值，默认值： false）
+always_send_full_costmap: false
+
+# 插件规范序列，每层一个。 每个规范都是一个带有名称和类型字段的字典。 该名称用于定义插件的参数命名空间。
+plugins:
+  - {name: static_layer,            type: "costmap_2d::StaticLayer"}
+  - {name: obstacle_layer,          type: "costmap_2d::ObstacleLayer"}
+  - {name: inflation_layer,         type: "costmap_2d::InflationLayer"}
+
+# 地图的宽度，以米为单位。（int，默认值：10）
+width: 12
+
+# 地图的高度，单位为米。（int，默认值：10）
+height: 6
+
+# 地图的分辨率，以米/单元为单位。 （双精度，默认值：0.05）
+resolution: 0.01
+
+# 全局框架中地图的 x 原点（以米为单位）。 （双精度，默认值：0.0）
+origin_x: 0.
+
+# 全局框架中地图的 y 原点（以米为单位）。 （双精度，默认值：0.0）
+origin_y: 0.
+
+#############################
+#
+#        static_layer
+#
+#############################
+static_layer:
+# 从地图服务器读取地图时，成本应被视为未知的值。 如果成本图没有跟踪未知空间，则该值的成本将被视为已占用。 值为零也会导致该参数不被使用。 （整数，默认值：-1）
+  unknown_cost_value: -1
+
+# 从地图服务器读取地图时考虑成本致命的阈值。（int，默认值：100）
+  lethal_cost_threshold: 100
+
+# costmap为静态地图订阅的主题。 当您在单个节点中有多个 costmap 实例并且想要使用不同的静态贴图时，此参数非常有用。 （字符串，默认值：“地图”）
+  map_topic: map
+
+# 只订阅地图主题上的第一条消息，忽略所有后续消息 (bool, 默认: false)
+  first_map_only: false
+
+# 除了map_topic之外，还订阅map_topic + "_updates" (bool, 默认: false)
+  subscribe_to_updates: false
+
+# 如果为 true，则地图消息中的未知值将直接转换到图层。 否则，地图消息中的未知值将被转换为图层中的 FREE_SPACE。 （布尔值，默认值：true）
+  track_unknown_space: true
+
+# 仅当静态层不是底层时才重要。 如果为 true，则仅将最大值写入主成本图。 （布尔值，默认值： false）
+  use_maximum: false
+
+# 如果为 true，则将所有映射消息值转换为 NO_INFORMATION/FREE_SPACE/LETHAL_OBSTACLE（三个值）。 如果为 false，则可能有完整范围的中间值。 （布尔值，默认值：true）
+  trinary_costmap: true
+
+#############################
+#
+#        inflation_layer
+#
+#############################
+inflation_layer:
+# 地图将障碍物成本值膨胀到的半径（以米为单位）。 （双倍，默认值：0.55）
+  inflation_radius: 0.35
+
+# 通货膨胀期间应用于成本值的比例因子。
+# 对于成本图中距离实际障碍物远于内切半径距离且小于膨胀半径距离的所有单元格，成本函数计算如下：exp(-1.0 * cost_scaling_factor * (distance_from_obstacle - inscribed_radius)) * (costmap_2d:: INSCRIBED_INFLATED_OBSTACLE - 1)，其中 costmap_2d::INSSCRIBED_INFLATED_OBSTACLE 当前为 254。 
+# 注意：由于 cost_scaling_factor 乘以公式中的负数，因此增加该因子将减少生成的成本值。 （双精度，默认值：10.0）
+  cost_scaling_factor: 10.0
+
+#############################
+#
+#      obstacle_layer
+#
+#############################
+obstacle_layer:
+# The maximum height of any obstacle to be inserted into the costmap in meters. This parameter should be set to be slightly higher than the height of your robot. (double, default: 2.0)
+  max_obstacle_height: 2.0
+# The default maximum distance from the robot at which an obstacle will be inserted into the cost map in meters. This can be over-ridden on a per-sensor basis. (double, default: 2.5)
+  obstacle_range: 3.0
+# The default range in meters at which to raytrace out obstacles from the map using sensor data. This can be over-ridden on a per-sensor basis. (double, default: 3.0)
+  raytrace_range: 4.0
+# If false, each pixel has one of 2 states: lethal obstacle or free. If true, each pixel has one of 3 states: lethal obstacle, free, or unknown.  (bool, default: false)
+  track_unknown_space: false
+# If true, the robot footprint will clear (mark as free) the space in which it travels. (bool, default: true)
+  footprint_clearing_enabled: true
+# A list of observation source names separated by spaces. This defines each of the <source_name> namespaces defined below. (string, default: "")
+  observation_sources: scan
+  
+  scan:
+# The topic on which sensor data comes in for this source. Defaults to the name of the source. (string, default: source_name)
+    topic: scan
+# The frame of the origin of the sensor. Leave empty to attempt to read the frame from sensor data. The frame can be read from both sensor_msgs/LaserScan, sensor_msgs/PointCloud, and sensor_msgs/PointCloud2 messages. (string, default: "")
+    sensor_frame: ""
+# How long to keep each sensor reading in seconds. A value of 0.0 will only keep the most recent reading. (double, default: 0.0)
+    observation_persistence: 0.0
+# How often to expect a reading from a sensor in seconds. A value of 0.0 will allow infinite time between readings. This parameter is used as a failsafe to keep the navigation stack from commanding the robot when a sensor has failed. It should be set to a value that is slightly more permissive than the actual rate of the sensor. For example, if we expect a scan from a laser every 0.05 seconds we might set this parameter to be 0.1 seconds to give a generous buffer and account for some amount of system latency. (double, default: 0.0)
+    expected_update_rate: 0.0
+# The data type associated with the topic, right now only "PointCloud", "PointCloud2", and "LaserScan" are supported. (string, default: "PointCloud")
+    data_type: LaserScan
+# Whether or not this observation should be used to clear out freespace.  (bool, default: false)
+    clearing: true
+# Whether or not this observation should be used to mark obstacles. (bool, default: true)
+    marking: true
+# The maximum height in meters of a sensor reading considered valid. This is usually set to be slightly higher than the height of the robot. Setting this parameter to a value greater than the global max_obstacle_height parameter has no effect. Setting this parameter to a value less than the global max_obstacle_height will filter out points from this sensor above that height.(double, default: 2.0)
+    max_obstacle_height: 2.0
+# The minimum height in meters of a sensor reading considered valid. This is usually set to be at ground height, but can be set higher or lower based on the noise model of your sensor. (double, default: 0.0)
+    min_obstacle_height: 0.0
+# The maximum range in meters at which to insert obstacles into the costmap using sensor data.  (double, default: 2.5)
+    obstacle_range: 3.0
+# The maximum range in meters at which to raytrace out obstacles from the map using sensor data.  (double, default: 3.0)
+    raytrace_range: 4.0
+# Allows for Inf values in "LaserScan" observation messages. The Inf values are converted to the laser maximum range.  (bool, default: false)
+    inf_is_valid: true
+

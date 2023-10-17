@@ -1,0 +1,9 @@
+uint8 NEW=0
+uint8 TRANSFORM=1
+uint8 DELETE=2
+
+string obstacle_id
+uint8 type
+float32[3] transform
+geometry_msgs/Polygon[] vertex
+---

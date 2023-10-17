@@ -1,0 +1,7 @@
+image: 跑圈地图.jpg
+resolution: 0.010000
+origin: [0.0000, 0.0000, 0.00000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+
