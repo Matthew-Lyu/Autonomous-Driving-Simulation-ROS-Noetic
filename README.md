@@ -4,7 +4,7 @@
 
 实现效果如下：
 
-<img src="https://p.ipic.vip/gliqiz.png" alt="image-20230716095238548" style="zoom: 21%;" />
+<img src="https://p.ipic.vip/gliqiz.png" alt="image-20230716095238548" style="zoom: 15%;" />
 
 ## 实现方案
 
