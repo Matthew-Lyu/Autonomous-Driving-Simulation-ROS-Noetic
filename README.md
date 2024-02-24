@@ -2,6 +2,12 @@
 
 ## 本项目是基于规划和汽车动力学的自动驾驶项目仿真
 
+## README.md
+
+- zh_CN [简体中文]()
+
+- 全局路径规划：Dijkstra算法
+
 实现效果如下：
 
 <img src="./assets/map1.gif" alt="image-20230716095238548" style="zoom: 15%;" />
