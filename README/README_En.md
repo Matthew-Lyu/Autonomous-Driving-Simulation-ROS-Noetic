@@ -2,10 +2,6 @@
 
 ## This project is a simulation of an autonomous driving project based on planning and vehicle dynamics.
 
-The implementation is as follows:
-
-<img src="./assets/map1.gif" alt="image-20230716095238548" style="zoom: 15%;" />
-
 ## Implementation Approach
 
 ### Planning
