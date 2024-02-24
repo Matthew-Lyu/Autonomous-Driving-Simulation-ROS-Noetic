@@ -1,12 +1,12 @@
-# AutoDrivingSimulation
-
-## 本项目是基于规划和汽车动力学的自动驾驶项目仿真
+# Auto Driving Simulation
 
 ## README.md
 
-- zh_CN [简体中文]()
+- zh_CN [简体中文](https://github.com/Matthew-Lyu/Auto-Driving-Simulation-ROS)
 
-- 全局路径规划：Dijkstra算法
+- en [English](https://github.com/Matthew-Lyu/Auto-Driving-Simulation-ROS/blob/main/README/README_En.md)
+
+## 本项目是基于规划和汽车动力学的自动驾驶项目仿真
 
 实现效果如下：
 
