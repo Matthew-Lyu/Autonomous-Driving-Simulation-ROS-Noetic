@@ -2,9 +2,9 @@
 
 ## README.md
 
-- zh_CN [简体中文](https://github.com/Matthew-Lyu/Auto-Driving-Simulation-ROS)
-
 - en [English](https://github.com/Matthew-Lyu/Auto-Driving-Simulation-ROS/blob/main/README/README_En.md)
+
+- zh_CN [简体中文](https://github.com/Matthew-Lyu/Auto-Driving-Simulation-ROS)
 
 ## 本项目是基于规划和汽车动力学的自动驾驶项目仿真
 
