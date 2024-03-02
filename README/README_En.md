@@ -1,4 +1,4 @@
-# Auto Driving Simulation
+# Autonomous Driving Simulation
 
 ## This project is a simulation of an autonomous driving project based on planning and vehicle dynamics.
 
