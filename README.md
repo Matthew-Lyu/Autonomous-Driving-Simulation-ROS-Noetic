@@ -8,7 +8,9 @@
 
 实现效果如下：
 
-<img src="./assets/map1.gif" alt="image-20230716095238548" style="zoom: 15%;" />
+<div align=center>
+<img src="./assets/map1.gif" width="650px">
+</div>
 
 ## 实现方案
 
