@@ -8,9 +8,7 @@
 
 实现效果如下：
 
-<div align=center>
-<img src="./assets/map1.gif" width="650px">
-</div>
+<img src="./assets/map1.gif" width="600px">
 
 ## 实现方案
 
