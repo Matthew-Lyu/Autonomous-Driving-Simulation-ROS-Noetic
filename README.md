@@ -231,5 +231,4 @@ void update_xC(double* xC, double* throttle_delta, double dt) {
 
 之后在打开的rviz可视化界面内用2D Pose Estimate和2D Nav Goal选择起点和终点就可以进行仿真了。
 
-<img src="https://p.ipic.vip/gliqiz.png" alt="image-20230716095238548" style="zoom: 15%;" />
-
+<img src="https://p.ipic.vip/gliqiz.png" width="600px">
