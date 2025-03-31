@@ -1,14 +1,8 @@
-# Autonomous Driving Simulation ROS Noetic
-
 ## README.md
 
 [English](https://github.com/Matthew-Lyu/Auto-Driving-Simulation-ROS/blob/main/README/README_En.md) ｜[简体中文](https://github.com/Matthew-Lyu/Auto-Driving-Simulation-ROS)
 
 ## 本项目是基于规划和汽车动力学的自动驾驶项目仿真
-
-实现效果如下：
-
-<img src="./assets/map1.gif" width="600px">
 
 ## 实现方案
 
